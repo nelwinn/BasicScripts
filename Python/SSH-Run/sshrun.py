@@ -22,7 +22,10 @@ parser.add_argument("-p", type=str, metavar="port",
 
 
 parser.add_argument("-sc", type=bool, metavar="Scanopenports",
-                    help="Usage: sc t/sc T/sc 1 (Optional)")
+                    help="Usage: sc t/ sc T/ sc 1 (Optional)")
+
+parser.add_argument("-o", type=bool, metavar="Show output after executing commands",
+                    help="Usage: o t/ o T/ o 1 (Optional)")
 
 
 args = parser.parse_args()
@@ -46,7 +49,7 @@ if port is None:
     port = 22
 
 
-def execute_command(remote_ip, print_output=True):
+def execute_command(remote_ip, print_output=False):
     try:
         ssh.connect(remote_ip,
                     username=username,
@@ -86,7 +89,8 @@ if args.sc:
     for i in range(int(range_start), 256):
         remote_ip = f"{ip_start}.{i}"
         print(remote_ip)
-        t = threading.Thread(target=execute_command, args=(remote_ip,))
+        t = threading.Thread(target=execute_command, args=(
+            remote_ip,), kwargs={"print_output": args.o})
         t.start()
 else:
-    execute_command(remote_ip, print_output=True)
+    execute_command(remote_ip, print_output=args.o)
