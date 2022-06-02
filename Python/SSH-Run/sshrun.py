@@ -14,7 +14,7 @@ parser.add_argument("a", type=str, metavar="Address",
 parser.add_argument("P", type=str, metavar="Password",
                     help="Password of remote system")
 
-parser.add_argument("C", type=str, metavar="Command",
+parser.add_argument("-C", type=str, metavar="Command",
                     help="Command to be executed, example: sudo su && ls")
 
 parser.add_argument("-p", type=str, metavar="port",
