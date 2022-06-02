@@ -8,10 +8,10 @@ parser = argparse.ArgumentParser(description="Execute SSH commands remotely.\n"
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-parser.add_argument("-a", type=str, metavar="Address",
+parser.add_argument("a", type=str, metavar="Address",
                     help="Address of remote system, usage: user@remoteIP")
 
-parser.add_argument("-P", type=str, metavar="Password",
+parser.add_argument("P", type=str, metavar="Password",
                     help="Password of remote system")
 
 parser.add_argument("-C", type=str, metavar="Command",
